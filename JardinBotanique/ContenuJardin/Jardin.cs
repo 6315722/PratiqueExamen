@@ -27,7 +27,7 @@ namespace JardinBotanique.ContenuJardin
         /// <exception cref="RessourcesInsuffisantesException"></exception>
         public void Planter(Plante plante, DateOnly date = new DateOnly())
         {
-            if (Ressources.Arroser(plante.BesoinEauParJour))
+            if (!Ressources.Arroser(plante.BesoinEauParJour))
             {
                 throw new RessourcesInsuffisantesException("Pas assez d'eau pour planter la plante choisie.");
             }

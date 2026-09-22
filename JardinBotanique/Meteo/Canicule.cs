@@ -13,7 +13,19 @@ namespace JardinBotanique.Meteo
     {
         public Canicule() : base("Canicule")
         {
+        }
+        // <summary>
+        // Impacter le jardin pendant une canicule.
+        // </summary>
+        // <param name="jardin">Le jardin à impacter.</param>
+        public override void Impacter(Jardin jardin)
+        {
+            if (jardin == null) throw new ArgumentNullException(nameof(jardin));
 
+            foreach(Plante plante in jardin.Plantes)
+            {
+                jardin.Ressources.Eau -= plante.BesoinEauParJour * 2; // Double le besoin en eau de chaque plante
+            }
         }
     }
 }
