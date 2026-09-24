@@ -71,25 +71,38 @@ namespace JardinBotanique.ContenuJardin
         {
             if (!EstVivante) return;
 
+            if (ToleranceSansEau > ressources.Eau)
+            {
+                EstVivante = false;
+            }
+
+            if (ressources.Arroser(BesoinEauParJour))
+            {
+             
+                Croissance++;
+                joursSansEau = 0;
+            }
+            else
+            {
+                joursSansEau++;
+            }
+
+
 
             // TODO: Compléter selon la documentation de la méthode.
+
+
 
             TimeSpan nbJoursDepuisDernierEngrais = date.ToDateTime(TimeOnly.MinValue) - dateDernierEngrais.ToDateTime(TimeOnly.MinValue);
 
             if (nbJoursDepuisDernierEngrais.TotalDays >= FrequenceEngrais)
             {
-               
-
-                    
                     if (ressources.UtiliserEngrais(1))
                         {
                          Croissance += 2;
                          dateDernierEngrais = date;
                         }
-                    if (ToleranceSansEau > ressources.Eau)
-                    {
-                        EstVivante = false;
-                    }
+                   
                     else if (ressources.Engrais < 1)
                     {
                         throw new RessourcesInsuffisantesException("Pas assez d'engrais pour planter une nouvelle plante.");

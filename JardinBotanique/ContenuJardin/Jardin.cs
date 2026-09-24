@@ -36,6 +36,10 @@ namespace JardinBotanique.ContenuJardin
             {
                 throw new RessourcesInsuffisantesException("Pas assez d'engrais pour planter la plante choisie.");
             }
+            else
+            {
+                Plantes.Add(plante);
+            }
         }
 
         /// <summary>
@@ -45,7 +49,11 @@ namespace JardinBotanique.ContenuJardin
         public void EntretenirPlantes(DateOnly date)
         {
             // TODO: voir documentation de la méthode.
-        }
+            foreach (Plante plante in Plantes)
+            {
+                plante.Entretenir(Ressources, date);
+            }
+            }
 
         /// <summary>
         /// Permet d'enlever toutes les plantes mortes du jardin.
